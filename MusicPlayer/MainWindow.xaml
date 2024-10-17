@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
-        Title="MusicPlayer" Height="450" Width="900" Closed="Window_Closed" Background="Gray">
+        Title="MusicPlayer" Height="450" Width="900" Closed="Window_Closed">
+    <Window.Background>
+        <RadialGradientBrush GradientOrigin="0, 1" SpreadMethod="Pad">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="White" Offset="0"/>
+        </RadialGradientBrush>
+    </Window.Background>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,31 +24,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,0,0,0" VerticalAlignment="Top">
-            <Button x:Name="AddBtn" Content="Add" Height="50" Width="100" Click="AddBtn_Click"/>
-            <Button x:Name="ClearBtn" Content="Clear" Height="50" Width="100" Click="ClearBtn_Click"/>
-            <Button x:Name="LoadBtn" Content="Load" Height="50" Width="100" Click="LoadBtn_Click"/>
-            <Button x:Name="SaveBtn" Content="Save" Height="50" Width="100" Click="SaveBtn_Click"/>
+            <Button x:Name="AddBtn" Content="Add" Height="20" Width="50" Click="AddBtn_Click"/>
+            <Button x:Name="ClearBtn" Content="Clear" Height="20" Width="50" Click="ClearBtn_Click"/>
+            <Button x:Name="LoadBtn" Content="Load" Height="20" Width="50" Click="LoadBtn_Click"/>
+            <Button x:Name="SaveBtn" Content="Save" Height="20" Width="50" Click="SaveBtn_Click"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Slider x:Name="Volume"  Maximum="1" SmallChange="0.01" ValueChanged="Volume_ValueChanged" MinWidth="200"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Slider x:Name="Volume"  Maximum="1" SmallChange="0.01" ValueChanged="Volume_ValueChanged" MinWidth="450"/>
             <TextBlock x:Name="VolumeTB" Text="50%" TextAlignment="Center" Width="100"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
-            <Button x:Name="PrevBtn" Content="&lt;&lt;" Height="40" Width="100" Click="PrevBtn_Click"/>
-            <Button x:Name="PlayBtn" Content="Play" Height="40" Width="100" Click="PlayBtn_Click"/>
-            <Button x:Name="StopBtn" Content="Stop" Height="40" Width="100" Click="StopBtn_Click"/>
-            <Button x:Name="NextBtn" Content=">>" Height="40" Width="100" Click="NextBtn_Click"/>
+            <Button x:Name="PrevBtn" Content="&lt;&lt;" Height="40" Width="80" Click="PrevBtn_Click" Template="{StaticResource ButtonsTemp}"/>
+            <Button x:Name="PlayBtn" Foreground="AntiqueWhite" Content="Play" Height="40" Width="80" Click="PlayBtn_Click" Template="{StaticResource ButtonsTemp}"/>
+            <Button x:Name="PauseBtn" Foreground="AntiqueWhite" Content="Pause" Height="40" Width="80" Click="PauseBtn_Click" Template="{StaticResource ButtonsTemp}"/>
+            <Button x:Name="StopBtn" Content="Stop" Height="40" Width="80" Click="StopBtn_Click" Template="{StaticResource ButtonsTemp}"/>
+            <Button x:Name="NextBtn" Content=">>" Height="40" Width="80" Click="NextBtn_Click" Template="{StaticResource ButtonsTemp}"/>
         </StackPanel>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.25*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0.25*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="PassedTimeTB" Text="00:00:00" Margin="10, 0, 0, 0"/>
-            <ProgressBar x:Name="ProgressBar" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
-            <TextBlock x:Name="TotalTimeTB" Text="00:00:00" Margin="10, 0, 10, 0" Grid.Column="2"/>
-        </Grid>
-        <ListBox x:Name="PlayList" Grid.Row="2" Background="Gray" MouseDoubleClick="PlayList_MouseDoubleClick" SelectionChanged="PlayList_SelectionChanged" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="3"/>
+        <TextBlock x:Name="PassedTimeTB" Grid.Row="1" Height="200" Width="100" Text="00:00:00" Margin="10, 0, 0, 0" Style="{StaticResource TS}" FontSize="26"/>
+        <ListBox x:Name="PlayList" Grid.Row="2" Background="Transparent" MouseDoubleClick="PlayList_MouseDoubleClick" SelectionChanged="PlayList_SelectionChanged" Grid.ColumnSpan="3" Margin="0,43,0,0" Grid.RowSpan="3"/>
     </Grid>
 </Window>

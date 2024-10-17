@@ -15,7 +15,6 @@ namespace MusicPlayer
     {
         private List<string> _paths = new();
         private MediaPlayer _player = new();
-        private DispatcherTimer _timer = new() { Interval = new TimeSpan(0, 0, 1)};
         public MainWindow()
         {
             InitializeComponent();
@@ -62,18 +61,9 @@ namespace MusicPlayer
 
         private void StopBtn_Click(object sender, RoutedEventArgs e)
         {
-            _player.Stop();
+            _player.Stop();        }
 
-            ProgressBar.Value = 0;
-            _timer.Stop();
-        }
-
-        private void PlayBtn_Click(object sender, RoutedEventArgs e)
-        {
-            _timer.Tick += Timer_Tick;
-            _timer.Start();
-            _player.Play();
-        }
+        private void PlayBtn_Click(object sender, RoutedEventArgs e) => _player.Play();
 
         private void PauseBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -108,17 +98,6 @@ namespace MusicPlayer
         {
             _player.Volume = Volume.Value;
             VolumeTB.Text = (Math.Round(_player.Volume * 100)) + "%";
-        }
-        private void Timer_Tick(object sender, object e)
-        {
-            ProgressBar.Value += 0.5;
-            if (ProgressBar.Value == 100)
-                _timer.Stop();
-        }
-
-        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            PassedTimeTB.Text = ProgressBar.Value.ToString() + " seconds";
         }
 
         private void Window_Closed(object sender, EventArgs e)
