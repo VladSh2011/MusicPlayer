@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
-        Title="MusicPlayer" Height="450" Width="900" Closed="Window_Closed" 
+        Title="MusicPlayer" Height="450" Width="900" Closed="Window_Closed" MinHeight="450" MinWidth="900" 
         Background="{StaticResource Window.Background.Brush}">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>

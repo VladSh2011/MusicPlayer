@@ -7,9 +7,9 @@
     </RadialGradientBrush>
 
     <Style TargetType="Button">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontFamily" Value="Verdana"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="WhiteSmoke"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Width" Value="50"/>
