@@ -24,7 +24,7 @@
             <Button x:Name="LoadBtn" Content="Load" Click="LoadBtn_Click"/>
             <Button x:Name="SaveBtn" Content="Save" Click="SaveBtn_Click"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2">
             <Slider x:Name="Volume" ValueChanged="Volume_ValueChanged" Style="{StaticResource Slider.Style}"/>
             <TextBlock x:Name="VolumeTB" Text="50%" TextAlignment="Center" Width="100"/>
         </StackPanel>
