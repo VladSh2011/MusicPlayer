@@ -15,11 +15,29 @@ namespace MusicPlayer
     {
         private List<string> _paths = new();
         private MediaPlayer _player = new();
+        private DispatcherTimer _timer = new();
         public MainWindow()
         {
             InitializeComponent();
             Volume.Value = _player.Volume;
             MemoryReader();
+            _timer.Tick += DispatcherTimer_tick;
+            _timer.Interval = TimeSpan.FromSeconds(1);
+        }
+
+        private void DispatcherTimer_tick(object? sender, EventArgs e)
+        {
+            if( _player.Source != null && _player.NaturalDuration.HasTimeSpan)
+            {
+                ProgressBar.Minimum = 0;
+                ProgressBar.Maximum = _player.NaturalDuration.TimeSpan.TotalSeconds;
+                ProgressBar.Value = _player.Position.TotalSeconds;
+                //PassedTimeTB.Text = TimeSpan.FromSeconds(_player.NaturalDuration.TimeSpan.TotalSeconds).ToString(@"hh\:mm\:ss");
+            }
+            if(_player.Position == _player.NaturalDuration && PlayList.SelectedIndex < PlayList.Items.Count-1)
+            {
+                NextBtn_Click(sender, null);
+            }
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -53,10 +71,11 @@ namespace MusicPlayer
             if (PlayList.SelectedIndex == -1)
                 _player.Stop();
             else
-            {
+            { 
                 _player.Open(new Uri(_paths[PlayList.SelectedIndex], UriKind.RelativeOrAbsolute));
                 _player.Play();
             }
+            _timer.Start();
         }
 
         private void StopBtn_Click(object sender, RoutedEventArgs e)
@@ -180,6 +199,16 @@ namespace MusicPlayer
 
                 }
             }        
+        }
+
+        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            PassedTimeTB.Text = TimeSpan.FromSeconds(ProgressBar.Value).ToString(@"hh\:mm\:ss");
+        }
+
+        private void ProgressBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _player.Position = TimeSpan.FromSeconds((e.GetPosition(ProgressBar).X * ProgressBar.Maximum) / ProgressBar.ActualWidth);
         }
     }
 }
