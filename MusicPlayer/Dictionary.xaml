@@ -19,7 +19,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="26"/>
         <Setter Property="Margin" Value="10,0,0,0"/>
-        <Setter Property="Height" Value="200"/>
+        <Setter Property="Height" Value="50"/>
         <Setter Property="Width" Value="100"/>
     </Style>
     <ControlTemplate x:Key="Button.Template" TargetType="{x:Type Button}">
